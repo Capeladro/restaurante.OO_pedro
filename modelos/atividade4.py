@@ -1,4 +1,3 @@
-
 class Livro:
     livros = []
 
