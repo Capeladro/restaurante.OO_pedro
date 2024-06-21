@@ -1,25 +1,27 @@
-# 1 criando uma classe em python
+
 class Restaurante:
-    nome=''
-    categoria=''
-    ativo=False
+    def __init__(self, nome, categoria, ativo=False):
+        self.nome = nome
+        self.categoria = categoria
+        self.ativo = ativo
+        self.avaliacoes = []
 
-restaurante_praca=Restaurante()
-restaurante_praca.nome='Bistrô'
-restaurante_praca.categoria='Italiana'
-restaurante_praca.ativo="ativo" if restaurante_praca.ativo else "inativo"
+    def ativar_desativar(self):
+        self.ativo = not self.ativo
+        if self.ativo:
+            return f'O restaurante {self.nome} foi ativado com sucesso.'
+        else:
+            return f'O restaurante {self.nome} foi desativado com sucesso.'
 
-print(f"O restaurante está {restaurante_praca}.")
+    def adicionar_avaliacao(self, nota):
+        self.avaliacoes.append(nota)
 
-print(f"Nome: {restaurante_praca.nome}, Categoria: {restaurante_praca.categoria}")
+    def calcular_media_avaliacoes(self):
+        if not self.avaliacoes:
+            return "Sem avaliações ainda."
+        else:
+            media = sum(self.avaliacoes) / len(self.avaliacoes)
+            return f'{self.nome}    Média de estrelas: {media:.2f} ({len(self.avaliacoes)} avaliações)'
 
-restaurante_pizza=Restaurante()
-restaurante_pizza.nome='Pizza Place'
-restaurante_pizza.categoria='Fast Food'
-restaurante_pizza.ativo=True
-
-restaurantes=[restaurante_praca,restaurante_pizza]
-
-print(dir(restaurante_praca))
-print('')
-print(vars(restaurante_praca))
+    def __str__(self):
+        return f'Nome: {self.nome.ljust(20)}  Categoria: {self.categoria.ljust(22)}  Status: {"Ativado" if self.ativo else "Desativado"}'
